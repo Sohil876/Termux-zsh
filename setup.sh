@@ -18,16 +18,16 @@ echo "Downloading and setting up oh-my-zsh."
 git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh --depth 1
 #cp $HOME/.oh-my-zsh/templates/zshrc.zsh-template $HOME/.zshrc
 
+# Copy .termux folder
+cp -r .termux/ $HOME/.termux
+chmod +x $HOME/.termux/fonts.sh $HOME/.termux/colors.sh
+
 # Powerlevel9k theme and sorce code pro powerline font
 echo "Installing powerlevel9k theme and source code pro powerline font."
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 #sed -i '/ZSH_THEME="robbyrussell"/c\ZSH_THEME="powerlevel9k/powerlevel9k"' $HOME/.zshrc
 wget https://github.com/gabrielelana/awesome-terminal-fonts/raw/patching-strategy/patched/SourceCodePro+Powerline+Awesome+Regular.ttf -O $HOME/.termux/font.ttf
 #sed '/^ZSH_THEME=.*/i POWERLEVEL9K_MODE="awesome-patched"' $HOME/.zshrc
-
-# Copy .termux folder
-cp .termux/ $HOME/.termux
-chmod +x $HOME/.termux/fonts.sh $HOME/.termux/colors.sh
 
 # Adding plugins
 echo "Setting up plugins."
