@@ -5,9 +5,9 @@ echo "Installing dependencies."
 apt update && apt install -y git zsh wget figlet
 
 # Create termux home directory if not exists
-if [ ! -d $HOME/.termux ]; then
-mkdir $HOME/.termux
-fi
+#if [ ! -d $HOME/.termux ]; then
+#mkdir $HOME/.termux
+#fi
 
 # Replacing termuxs boring welcome message with something good looking
 mv $PREFIX/etc/motd $PREFIX/etc/motd.bak
@@ -24,6 +24,10 @@ git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/theme
 #sed -i '/ZSH_THEME="robbyrussell"/c\ZSH_THEME="powerlevel9k/powerlevel9k"' $HOME/.zshrc
 wget https://github.com/gabrielelana/awesome-terminal-fonts/raw/patching-strategy/patched/SourceCodePro+Powerline+Awesome+Regular.ttf -O $HOME/.termux/font.ttf
 #sed '/^ZSH_THEME=.*/i POWERLEVEL9K_MODE="awesome-patched"' $HOME/.zshrc
+
+# Copy .termux folder
+cp .termux/ $HOME/.termux
+chmod +x $HOME/.termux/fonts.sh $HOME/.termux/colors.sh
 
 # Adding plugins
 echo "Setting up plugins."
