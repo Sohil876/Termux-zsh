@@ -1,14 +1,5 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-
-# Disable unnecessary userinfo on left prompt (rn being done by powerlevel9k theme)
-#prompt_context() {}
-
 # Welcome message
-figlet Termux
+figlet -f slant Termux
 echo "(Setup by: Sohil876)"
 echo ""
 echo "Working with packages:
@@ -21,12 +12,37 @@ Subscribing to additional repositories:
  * X11:      pkg install x11-repo"
 echo ""
 
+# Needed to make gpg(2) work
+#export GPG_TTY=$(tty)
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
+
+# Disable unnecessary userinfo on left prompt (rn being done by powerlevel9k theme)
+#prompt_context() {}
+
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 POWERLEVEL9K_MODE="awesome-patched"
-ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_INSTANT_PROMPT=quiet
+ZLE_RPROMPT_INDENT=0
+#ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME=powerlevel10k/powerlevel10k
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 # Add a space in the first prompt
@@ -36,10 +52,11 @@ local user_symbol="$"
 if [[ $(print -P "%#") =~ "#" ]]; then
     user_symbol = "#"
 fi
+#POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=3
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%{%B%F{black}%K{yellow}%} $user_symbol%{%b%f%k%F{yellow}%} %{%f%}"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir newline vcs)
-#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history time)
-POWERLEVEL9K_DISABLE_RPROMPT=true
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(root_indicator dir_writable os_icon newline ssh)
+#POWERLEVEL9K_DISABLE_RPROMPT=true
 #POWERLEVEL9K_COLOR_SCHEME="light"
 
 # Set list of themes to pick from when loading at random
@@ -62,7 +79,7 @@ POWERLEVEL9K_DISABLE_RPROMPT=true
 # DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=7
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS=true
@@ -74,7 +91,7 @@ POWERLEVEL9K_DISABLE_RPROMPT=true
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -129,4 +146,5 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
 

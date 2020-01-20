@@ -1,8 +1,13 @@
 source ~/.zplugin/bin/zplugin.zsh
 #source ~/home/.zplugin/plugins/tj---git-extras/etc/git-extras-completion.zsh
 
+#SAVEHIST=100
+#HISTFILE=~/.zsh_history
+export HISTFILE=~/.zsh_history
+export SAVEHIST=$HISTSIZE
+
 # Welcome message
-figlet Termux
+figlet -f slant Termux
 echo "(Setup by: Sohil876)"
 echo ""
 echo "Working with packages:
@@ -14,6 +19,11 @@ Subscribing to additional repositories:
  * Unstable: pkg install unstable-repo
  * X11:      pkg install x11-repo"
 echo ""
+
+# Needed to make gpg(2) work
+#export GPG_TTY=$(tty)
+GPG_TTY=$(tty)
+export GPG_TTY
 
 # (optional) If you place the source below compinit, then add those two lines after the source:
 #autoload -Uz _zplugin
@@ -84,3 +94,7 @@ zplugin creinstall %HOME/my_completions
 # coreutils package from Homebrew; you can also use https://github.com/ogham/exa)
 zplugin ice atclone"dircolors -b LS_COLORS > c.zsh" atpull'%atclone' pick"c.zsh" nocompile'!'
 zplugin light trapd00r/LS_COLORS
+
+autoload -U +X compinit && compinit
+#autoload -U +X bashcompinit && bashcompinit
+zplugin cdreplay

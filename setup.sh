@@ -15,10 +15,11 @@ mv $PREFIX/etc/motd $PREFIX/etc/motd.bak
 # message included in *rc files
 
 echo "Select installation:"
-echo "Enter 1 to select zplugin, 2 for oh-my-zsh and 3 for prezto"
+echo "Best use OhMyZsh unless you want a very complex setup with zplugin."
+echo "Enter 1 to select Zplugin, 2 for Oh-My-Zsh and 3 for Prezto"
 read -p "|=> " choice;
 if [[ $choice == 1 ]] ; then
-  echo "zplugin selected!"
+  echo "Zplugin selected!"
   # Install plugin dependencies
   echo "Installing plugin required dependencies:"
   apt update && apt install -y make file
@@ -26,26 +27,27 @@ if [[ $choice == 1 ]] ; then
   cp -r .termux/ ~/.termux
   chmod +x ~/.termux/fonts.sh ~/.termux/colors.sh
   # Download and setup zplugin
-  echo "Downloading and setting up zlugin."
+  echo "Downloading and setting up Zplugin."
   mkdir ~/.zplugin
   git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
   mkdir ~/my_completions
   # Copying over configured .zshrc file
   cp zp.zshrc $HOME/.zshrc
   touch ~/.zsh_history
+  chmod +rwx ~/.zshrc
   chmod +rw ~/.zsh_history
-  echo "zplugin downloaded and configured!, to start the installation,"
+  echo "Zplugin downloaded and configured!, install will proceed on termux restart!"
 elif [[ $choice == 2 ]] ; then
-  echo "oh-my-zsh selected!"
+  echo "Oh-My-Zsh selected!"
   # Copy .termux folder
   cp -r .termux/ ~/.termux
   chmod +x ~/.termux/fonts.sh ~/.termux/colors.sh
   # Download and setup oh-my-zsh
-  echo "Downloading and setting up oh-my-zsh."
+  echo "Downloading and setting up Oh-My-Zsh."
   git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh
-  # Powerlevel9k theme and source code pro powerline font
-  echo "Installing powerlevel9k theme with source code pro powerline font support."
-  git clone --depth=1 https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+  # Powerlevel10k theme and source code pro powerline font
+  echo "Installing powerlevel10k theme with source code pro powerline font support."
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
   #wget https://github.com/gabrielelana/awesome-terminal-fonts/raw/patching-strategy/patched/SourceCodePro+Powerline+Awesome+Regular.ttf -O $HOME/.termux/font.ttf
   # Adding plugins
   echo "Setting up plugins."
@@ -55,10 +57,12 @@ elif [[ $choice == 2 ]] ; then
   # Copying over configured .zshrc file
   #cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
   cp omz.zshrc ~/.zshrc
-  echo "Finished installing oh-my-zsh!"
+  chmod +rwx ~/.zshrc
+  chmod +rw ~/.zsh_history
+  echo "Finished installing Oh-My-Zsh!"
 elif [[ $choice == 3 ]]; then
-  echo "prezto selected!"
-  echo "Preztzo support to come in time :p"
+  echo "Prezto selected!"
+  echo "Preztzo support to come in time, if i feel like using it :p"
   exit 1;
 else
   echo "Invalid choice!"
@@ -69,7 +73,7 @@ fi
 #sed '/^# alias ohmyzsh=*/a\prompt_context() {}' $HOME/.zshrc
 
 # Set zsh as default
-echo "Setting up zsh as default."
+echo "Setting up zsh as default shell."
 chsh -s zsh
 #mv $DIR/.files/colors.properties $HOME/.termux/colors.properties
 
