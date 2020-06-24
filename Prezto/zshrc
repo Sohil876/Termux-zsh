@@ -71,7 +71,7 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(root_indicator dir_writable os_icon newline 
 #POWERLEVEL9K_DISABLE_RPROMPT=true
 #POWERLEVEL9K_COLOR_SCHEME="light"
 
-# Use lf to switch directories and bind it to ctrl-o
+# Use lf to switch directories and bind it to CTRL+O
 lfcd () {
     tmp="$(mktemp)"
     lf -last-dir-path="$tmp" "$@"
@@ -82,4 +82,16 @@ lfcd () {
     fi
 }
 bindkey -s '^o' 'lfcd\n'
+
+# Edit line in text editor with CTRL+E
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+# Tranfer.sh file function to tranfer files
+# Usage transfer file.ext | less
+transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi
+tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; rm -f $tmpfile; }
+
+#Alias
+#alias cacs=='free -h && sync && echo 3 > /proc/sys/vm/drop_caches && echo "RAM CEARED!" && free -h'
 
