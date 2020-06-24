@@ -37,7 +37,11 @@ if [[ $choice == 1 ]]; then
   chmod +rwx ~/.zshrc
   chmod +rw ~/.zhistory
   chmod +rw ~/.zsh_history_root
+  echo installing "lf - Terminal File Manager"
+  cp bin/lf-r14 $PREFIX/bin/lf
+  chmod +x $PREFIX/bin/lf
   echo "Finished installing Prezto!"
+  
   exit 1;
 else
   echo "Invalid choice!"

@@ -11,4 +11,5 @@ My personal termux setup, a bit modernized terminal :)
 - Disable unnecessary infos on right and left prompts.
 - Enable double line left prompt with diffrent icons for dir, git and vcs, beautified left command prompt a bit, enabled new line after prompt.
 - Replace termux's default welcome message with a better looking one.
+- Install static lf binary (Terminal file manager), press CTRL+O to execute lf in current directory.
 
