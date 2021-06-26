@@ -3,7 +3,7 @@
 
 # Install dependencies
 echo "Installing dependencies:"
-apt update && apt install -y git zsh wget figlet
+apt update && apt install -y git zsh wget figlet lf
 
 # Create termux home directory if not exists
 #if [ ! -d $HOME/.termux ]; then
@@ -37,9 +37,6 @@ if [[ $choice == 1 ]]; then
   chmod +rwx ~/.zshrc
   chmod +rw ~/.zhistory
   chmod +rw ~/.zsh_history_root
-  echo installing "lf - Terminal File Manager"
-  cp bin/lf-r14 $PREFIX/bin/lf
-  chmod +x $PREFIX/bin/lf
   echo "Finished installing Prezto!"
   
   exit 1;
