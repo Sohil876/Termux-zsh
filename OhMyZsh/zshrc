@@ -41,7 +41,6 @@ export ZSH=$HOME/.oh-my-zsh
 POWERLEVEL9K_MODE="awesome-patched"
 POWERLEVEL9K_INSTANT_PROMPT=quiet
 ZLE_RPROMPT_INDENT=0
-#ZSH_THEME="powerlevel9k/powerlevel9k"
 ZSH_THEME=powerlevel10k/powerlevel10k
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_PROMPT_ON_NEWLINE=true
@@ -58,6 +57,8 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir newline vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(root_indicator dir_writable os_icon newline ssh)
 #POWERLEVEL9K_DISABLE_RPROMPT=true
 #POWERLEVEL9K_COLOR_SCHEME="light"
+# Disable powerlevel conf wizard
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -107,7 +108,7 @@ ENABLE_CORRECTION="true"
 # "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # or set a custom format using the strftime function format specifications,
 # see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
+# HIST_STAMPS="dd/mm/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -146,5 +147,4 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
 

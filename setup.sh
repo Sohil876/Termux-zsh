@@ -5,24 +5,38 @@
 echo "Installing dependencies:"
 apt update && apt install -y git zsh wget figlet lf
 
-# Create termux home directory if not exists
-#if [ ! -d $HOME/.termux ]; then
-#mkdir $HOME/.termux
-#fi
-
 # Replacing termuxs boring welcome message with something good looking
 mv $PREFIX/etc/motd $PREFIX/etc/motd.bak
 # message included in *rc files
 
+# Start installation
 echo "Select installation:"
-echo "N.O.T.E:= Dropped other plugin managers in favour of Prezto"
-echo "Enter 1 to install and set Prezto as default."
+echo "N.O.T.E:= Dropped Zinit (Zplugin)"
+echo "Enter 1 for Oh-My-Zsh and 2 for Prezto"
 vared -p "|=> " -c choice;
-if [[ $choice == 1 ]]; then
+if [[ $choice == 1 ]] ; then
+  echo "Oh-My-Zsh selected!"
+  # Download and setup oh-my-zsh
+  echo "Downloading and setting up Oh-My-Zsh."
+  git clone --recursive https://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh
+  # Powerlevel10k theme and source code pro powerline font
+  echo "Installing powerlevel10k theme with source code pro powerline font support."
+  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+  #wget https://github.com/gabrielelana/awesome-terminal-fonts/raw/patching-strategy/patched/SourceCodePro+Powerline+Awesome+Regular.ttf -O $HOME/.termux/font.ttf
+  # Adding plugins
+  echo "Setting up plugins."
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
+  git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/zsh-autosuggestions
+  echo "Installed & enabled syntax highlighter, autosuggestion plugins."
+  # Copying over configured .zshrc file
+  #cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+  cp -f OhMyZsh/zshrc ~/.zshrc
+  chmod +rwx ~/.zshrc
+  chmod +rw ~/.zsh_history
+  chmod +rw ~/.zsh_history_root
+  echo "Finished installing Oh-My-Zsh!"
+elif [[ $choice == 2 ]]; then
   echo "Prezto selected!"
-  # Copy .termux folder
-  cp -fr Termux/ ~/.termux
-  chmod +x ~/.termux/fonts.sh ~/.termux/colors.sh
   # Download and setup Prezto
   echo "Downloading and setting up Prezto."
   git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
@@ -38,12 +52,14 @@ if [[ $choice == 1 ]]; then
   chmod +rw ~/.zhistory
   chmod +rw ~/.zsh_history_root
   echo "Finished installing Prezto!"
-  
-  exit 1;
 else
   echo "Invalid choice!"
   exit 1;
 fi
+
+# Copy .termux folder
+cp -fr Termux/ ~/.termux
+chmod +x ~/.termux/fonts.sh ~/.termux/colors.sh
 
 # Remove the unnecessary userinfo on left prompt
 #sed '/^# alias ohmyzsh=*/a\prompt_context() {}' $HOME/.zshrc
