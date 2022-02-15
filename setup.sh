@@ -1,21 +1,14 @@
 #!/bin/bash
-#DIR="$(pwd)"
+#
+## Termux-Zsh
+#
 
-# Install dependencies
-echo "Installing dependencies:"
-apt update && apt install -y git zsh figlet lf
+install_dependencies() {
+  echo "Installing dependencies:"
+  apt update && apt install -y git zsh figlet lf wget micro
+}
 
-# Replacing termuxs boring welcome message with something good looking
-mv $PREFIX/etc/motd $PREFIX/etc/motd.bak
-# message included in *rc files
-
-# Start installation
-echo "Select installation:"
-echo "N.O.T.E:= Dropped Zinit (Zplugin)"
-echo "Enter 1 for Oh-My-Zsh and 2 for Prezto"
-vared -p "|=> " -c choice;
-if [[ $choice == 1 ]] ; then
-  echo "Oh-My-Zsh selected!"
+install_ohmyzsh() {
   # Download and setup oh-my-zsh
   echo "Downloading and setting up Oh-My-Zsh."
   git clone --recursive https://github.com/robbyrussell/oh-my-zsh ~/.oh-my-zsh
@@ -29,11 +22,10 @@ if [[ $choice == 1 ]] ; then
   git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/plugins/zsh-autosuggestions
   echo "Installed & enabled syntax highlighter, autosuggestion plugins."
   # Copying over configured .zshrc file
-  #cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-  if [ $(dpkg --print-architecture) != 'arm' ] ; then
-    cp -f OhMyZsh/zshrc ~/.zshrc
-  else
-    cp -f OhMyZsh/zshrc_armv7 ~/.zshrc
+  cp -f OhMyZsh/zshrc ~/.zshrc
+  if [ $(dpkg --print-architecture) == 'arm' ] ; then
+    # There's no binaries of gitstatus for armv7 right now so disable it
+    echo -e "\n#Disable gitstatus for now (Only for armv7 devices)\nPOWERLEVEL9K_DISABLE_GITSTATUS=true" >> ~/.zshrc
   fi
   chmod +rwx ~/.zshrc
   if [ -f OhMyZsh/zsh_history]; then
@@ -41,41 +33,45 @@ if [[ $choice == 1 ]] ; then
     chmod +rw ~/.zsh_history
   fi
   echo "Oh-My-Zsh installed!"
-elif [[ $choice == 2 ]]; then
-  echo "Prezto selected!"
-  # Download and setup Prezto
-  echo "Downloading and setting up Prezto."
-  git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-  # Create rc files
-  setopt EXTENDED_GLOB
-  for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-    ln -fs "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-  done
-  # Copying over configured files
-  cp -f Prezto/zpreztorc ~/.zprezto/runcoms/zpreztorc
-  cp -f Prezto/zshrc ~/.zprezto/runcoms/zshrc
-  chmod +rwx ~/.zshrc
-  chmod +rw ~/.zhistory
-  chmod +rw ~/.zsh_history_root
-  echo "Prezto installed!"
-else
-  echo "Invalid choice!"
-  exit 1;
-fi
+}
 
-# Copy .termux folder
-cp -fr Termux/ ~/.termux
-chmod +x ~/.termux/fonts.sh ~/.termux/colors.sh
+finish_install() {
+  # Copy .termux folder
+  cp -fr Termux/ ~/.termux
+  chmod +x ~/.termux/fonts.sh ~/.termux/colors.sh
+  # Replacing termuxs boring welcome message with something good looking
+  mv $PREFIX/etc/motd $PREFIX/etc/motd.bak
+  # message included in *rc files
+  # Remove the unnecessary userinfo on left prompt
+  #sed '/^# alias ohmyzsh=*/a\prompt_context() {}' $HOME/.zshrc
+  # Set zsh as default
+  echo "Setting up zsh as default shell."
+  chsh -s zsh
+  # Setup Complete
+  termux-setup-storage
+  termux-reload-settings
+  echo "Setup Completed!"
+  echo "Please restart Termux!"
+}
 
-# Remove the unnecessary userinfo on left prompt
-#sed '/^# alias ohmyzsh=*/a\prompt_context() {}' $HOME/.zshrc
+# Start installation
+read -p "Install Oh-My-Zsh? [Y/n]" -n 1 -r yn
+echo # For newline
+case $yn in
+    [Yy]* )
+      install_dependencies
+      install_ohmyzsh
+      finish_install
+      exit 0
+    ;;
+    [Nn]* )
+      echo "Installation aborted!"
+      exit 1
+    ;;
+esac
 
-# Set zsh as default
-echo "Setting up zsh as default shell."
-chsh -s zsh
+# Error msg for invalid choice
+echo "Invalid choice!"
+echo ""
+exit 1
 
-# Setup Complete
-termux-setup-storage
-termux-reload-settings
-echo "Setup Completed!"
-echo "Please restart Termux!"
