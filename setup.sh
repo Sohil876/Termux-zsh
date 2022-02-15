@@ -3,7 +3,7 @@
 
 # Install dependencies
 echo "Installing dependencies:"
-apt update && apt install -y git zsh wget figlet lf
+apt update && apt install -y git zsh figlet lf
 
 # Replacing termuxs boring welcome message with something good looking
 mv $PREFIX/etc/motd $PREFIX/etc/motd.bak
@@ -30,11 +30,17 @@ if [[ $choice == 1 ]] ; then
   echo "Installed & enabled syntax highlighter, autosuggestion plugins."
   # Copying over configured .zshrc file
   #cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
-  cp -f OhMyZsh/zshrc ~/.zshrc
+  if [ $(dpkg --print-architecture) != 'arm' ] ; then
+    cp -f OhMyZsh/zshrc ~/.zshrc
+  else
+    cp -f OhMyZsh/zshrc_armv7 ~/.zshrc
+  fi
   chmod +rwx ~/.zshrc
-  chmod +rw ~/.zsh_history
-  chmod +rw ~/.zsh_history_root
-  echo "Finished installing Oh-My-Zsh!"
+  if [ -f OhMyZsh/zsh_history]; then
+    cp -f OhMyZsh/zsh_history ~/.zsh_history
+    chmod +rw ~/.zsh_history
+  fi
+  echo "Oh-My-Zsh installed!"
 elif [[ $choice == 2 ]]; then
   echo "Prezto selected!"
   # Download and setup Prezto
@@ -51,7 +57,7 @@ elif [[ $choice == 2 ]]; then
   chmod +rwx ~/.zshrc
   chmod +rw ~/.zhistory
   chmod +rw ~/.zsh_history_root
-  echo "Finished installing Prezto!"
+  echo "Prezto installed!"
 else
   echo "Invalid choice!"
   exit 1;
@@ -67,7 +73,6 @@ chmod +x ~/.termux/fonts.sh ~/.termux/colors.sh
 # Set zsh as default
 echo "Setting up zsh as default shell."
 chsh -s zsh
-#mv $DIR/.files/colors.properties $HOME/.termux/colors.properties
 
 # Setup Complete
 termux-setup-storage

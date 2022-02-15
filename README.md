@@ -3,6 +3,12 @@ My personal termux setup, a bit modernized terminal **:)**
 
 ![Termux-zsh-SS](Termux-zsh-SS.png)
 
+**Installation**
+- Install zsh and git `pkg install zsh git` (because of usage of `vared` its incompatible with bash atm)
+- Clone this repo and cd into it `git clone https://github.com/Sohil876/Termux-zsh`
+- Run setup.sh with zsh `zsh setup.sh`
+- Restart termux (If you have weird font rendering issue just run `rm -rf ~/.termux` in termux and rerun setup.sh again for now.
+
 **What it does?:** 
 - Installs zsh and sets it as default shell.
 - Installs user selectable zsh framework from available options (1) oh-my-zsh (2) Prezto for plugins and themes. (Dropped zinit)
