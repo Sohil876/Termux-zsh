@@ -1,14 +1,18 @@
-# Termux-ZSH
+### Termux-ZSH
 Termux with zsh, a bit modernized terminal **:)**
 
 ![Termux-zsh-SS](Termux-zsh-SS.png)
 
-**Installation:**
+### Notes:
+- Termux from playstore [is no longer updated](https://wiki.termux.com/wiki/Termux_Google_Play), install termux from [f-droid](https://f-droid.org/en/packages/com.termux) instead.
+- To run commands in termux from other apps or open it in a directory with a filemanager ([Mixplorer](https://forum.xda-developers.com/t/app-2-2-mixplorer-v6-x-released-fully-featured-file-manager.1523691/) for example) give it App on top or draw over other apps permission and set `allow-external-apps` to true in `~/.termux/termux.properties`, However keep in mind that any app that supports this functionality can then automatically execute commands in termux so its very unsafe and should be only set to true when necessary.
+
+### Installation:
 - Clone this repo `git clone https://github.com/Sohil876/Termux-zsh`
 - Run setup.sh file `bash setup.sh`
 - Restart termux (If you have weird font rendering issue just run `rm -rf ~/.termux` in termux and rerun setup.sh again for now)
 
-**What it does?:** 
+### What it does?:
 - Installs zsh and sets it as default shell.
 - Installs user customizable zsh framework [OhMyZsh](https://github.com/ohmyzsh/ohmyzsh) for plugins and themes. (Dropped prezto, zinit)
 - Installs Powerlevel10k theme and prepatched SourceCodePro font as default.
