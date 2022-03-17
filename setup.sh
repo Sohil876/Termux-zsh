@@ -5,7 +5,7 @@
 
 install_dependencies() {
   echo "Installing dependencies:"
-  apt update && apt install -y git zsh figlet lf wget micro
+  apt update && apt install -y git zsh figlet lf wget micro man
 }
 
 install_ohmyzsh() {
@@ -23,12 +23,12 @@ install_ohmyzsh() {
   echo "Installed & enabled syntax highlighter, autosuggestion plugins."
   # Copying over configured .zshrc file
   cp -f OhMyZsh/zshrc ~/.zshrc
-  if [ $(dpkg --print-architecture) == 'arm' ] ; then
+  if [$(dpkg --print-architecture) == 'arm'] ; then
     # There's no binaries of gitstatus for armv7 right now so disable it
     echo -e "\n#Disable gitstatus for now (Only for armv7 devices)\nPOWERLEVEL9K_DISABLE_GITSTATUS=true" >> ~/.zshrc
   fi
   chmod +rwx ~/.zshrc
-  if [ -f OhMyZsh/zsh_history]; then
+  if [-f OhMyZsh/zsh_history]; then
     cp -f OhMyZsh/zsh_history ~/.zsh_history
     chmod +rw ~/.zsh_history
   fi
@@ -36,8 +36,10 @@ install_ohmyzsh() {
 }
 
 finish_install() {
+  # Remove already existing .termux folder
+  rm -rf ~/.termux
   # Copy .termux folder
-  cp -fr Termux/ ~/.termux
+  cp -r Termux ~/.termux
   chmod +x ~/.termux/fonts.sh ~/.termux/colors.sh
   # Replacing termuxs boring welcome message with something good looking
   mv $PREFIX/etc/motd $PREFIX/etc/motd.bak
