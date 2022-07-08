@@ -46,6 +46,10 @@ finish_install() {
   # message included in *rc files
   # Remove the unnecessary userinfo on left prompt
   #sed '/^# alias ohmyzsh=*/a\prompt_context() {}' $HOME/.zshrc
+  # Remove gitstatusd from cache if arm
+  if [$(dpkg --print-architecture) == 'arm'] ; then
+    rm -rf ~/.cache/gitstatus
+  fi
   # Set zsh as default
   echo "Setting up zsh as default shell."
   chsh -s zsh
