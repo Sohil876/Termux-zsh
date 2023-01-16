@@ -28,9 +28,14 @@ install_ohmyzsh() {
     echo -e "\n#Disable gitstatus for now (Only for armv7 devices)\nPOWERLEVEL9K_DISABLE_GITSTATUS=true" >> ~/.zshrc
   fi
   chmod +rwx ~/.zshrc
+  # Copy over zsh_history file if its found in OhMyZsh directory
   if [-f OhMyZsh/zsh_history]; then
     cp -f OhMyZsh/zsh_history ~/.zsh_history
     chmod +rw ~/.zsh_history
+  fi
+  # Copy over custom_aliases.zsh file if its found in OhMyZsh directory
+  if [-f OhMyZsh/custom_aliases.zsh]; then
+    cp -f OhMyZsh/custom_aliases.zsh ~/.oh-my-zsh/custom/custom_aliases.zsh
   fi
   echo "Oh-My-Zsh installed!"
 }
