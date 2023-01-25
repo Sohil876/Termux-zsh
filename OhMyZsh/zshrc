@@ -1,7 +1,6 @@
 # Welcome message
 figlet -f slant Termux
 echo "v${TERMUX_VERSION} | ${TERMUX_APK_RELEASE}"
-echo "(Setup by: Sohil876)"
 echo ""
 echo "Working with packages:
   Search:  pkg search <query>
