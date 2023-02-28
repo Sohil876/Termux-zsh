@@ -14,13 +14,17 @@ Termux with zsh, a bit modernized terminal **:)**\
 -   To run commands in termux from other apps or open it in a directory with a filemanager ([Mixplorer](https://forum.xda-developers.com/t/app-2-2-mixplorer-v6-x-released-fully-featured-file-manager.1523691/) for example) give it App on top or draw over other apps permission and set `allow-external-apps` to true in `~/.termux/termux.properties`, However keep in mind that any app that supports this functionality can then automatically execute commands in termux so its very unsafe and should be only set to true when necessary.
 -   You can set custom aliases or override any alias you want by setting them in `OhMyZsh/custom_aliases.zsh` before installing termux-zsh, or in `~/.oh-my-zsh/custom/custom_aliases.zsh` after installing it.
 -   By default all `commit` aliases of git plugin now use verbose flags for some reason, that ends up inserting huge verbose diff in commit message, if you don't want that behaviour for any git commit aliases you can re set them as specified in above note in the `custom_aliases.zsh` file, im overriding `gc` alias in there by default to remove the verbose flag, you can use that as example and set yours in that file, you need to reload termux after setting them.
--   You can use `omz update` command in termux to update OhMyZsh framework/plugins/themes to latest versions.
 
 ### Installation:
 
 -   Clone this repo `git clone https://github.com/Sohil876/Termux-zsh`
 -   Run setup.sh file `bash setup.sh`
 -   Restart termux
+
+### Update:
+
+-   You can use `omz update` command in termux to update OhMyZsh framework/plugins manually to latest versions, by default it will prompt you automatically if it finds any update available.
+-   You can use `p10k-update` command in termux to check and update powerlevel10k theme to latest version.
 
 ### What it does?:
 
