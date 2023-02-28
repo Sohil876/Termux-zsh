@@ -25,7 +25,7 @@ install_ohmyzsh() {
   cp -f OhMyZsh/zshrc ~/.zshrc
   if [$(dpkg --print-architecture) == 'arm'] ; then
     # There's no binaries of gitstatus for armv7 right now so disable it
-    echo -e "\n#Disable gitstatus for now (Only for armv7 devices)\nPOWERLEVEL9K_DISABLE_GITSTATUS=true" >> ~/.zshrc
+    echo -e "\n# Disable gitstatus for now (Only for armv7 devices)\nPOWERLEVEL9K_DISABLE_GITSTATUS=true\n" >> ~/.zshrc
   fi
   chmod +rwx ~/.zshrc
   # Copy over zsh_history file if its found in OhMyZsh directory

@@ -73,14 +73,12 @@ POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-### These will be unsupported in future
-## Refer https://github.com/ohmyzsh/ohmyzsh/wiki/Settings#deprecated-settings
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-# Uncomment the following line to change how often to auto-update (in days).
-export UPDATE_ZSH_DAYS=7
+### OhMyZsh Update settings
+## Refer to https://github.com/ohmyzsh/ohmyzsh/wiki/Settings#omzupdate-mode for detailed info
+# Update mode, available: auto, reminder, prompt, disabled
+zstyle ':omz:update' mode prompt
+# How often to check for updates (in days).
+zstyle ':omz:update' frequency 7
 ###
 
 # Uncomment the following line if pasting URLs and other text is messed up.
