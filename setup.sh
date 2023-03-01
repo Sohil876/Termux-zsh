@@ -37,6 +37,8 @@ install_ohmyzsh() {
   if [-f OhMyZsh/custom_aliases.zsh]; then
     cp -f OhMyZsh/custom_aliases.zsh ~/.oh-my-zsh/custom/custom_aliases.zsh
   fi
+  # Copy over customized powerlevel10k theme
+  cp -f OhMyZsh/p10k.zsh ~/.p10k.zsh
   echo "Oh-My-Zsh installed!"
 }
 
