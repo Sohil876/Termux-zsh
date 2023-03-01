@@ -5,7 +5,7 @@
 
 install_dependencies() {
   echo "Installing dependencies:"
-  apt update && apt install -y git zsh figlet lf wget micro man
+  apt update && apt install -y git zsh figlet toilet lf wget micro man
 }
 
 install_ohmyzsh() {
