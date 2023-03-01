@@ -46,10 +46,12 @@ finish_install() {
   # Copy .termux folder
   cp -r Termux ~/.termux
   chmod +x ~/.termux/fonts.sh ~/.termux/colors.sh
+  # Set default color scheme
+  ln -fs ~/.termux/colors/dark/IrBlack ~/.termux/colors.properties
   # Replacing termuxs boring welcome message with something good looking
   mv $PREFIX/etc/motd $PREFIX/etc/motd.bak
   mv $PREFIX/etc/motd.sh $PREFIX/etc/motd.sh.bak
-  # message included in *rc files
+  # message included in *rc file
   # Remove the unnecessary userinfo on left prompt
   #sed '/^# alias ohmyzsh=*/a\prompt_context() {}' $HOME/.zshrc
   # Remove gitstatusd from cache if arm
