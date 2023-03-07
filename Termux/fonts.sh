@@ -31,22 +31,22 @@ echo -e "
 while true; do
 	read -p "Enter a number to select font: " input;
 
-    if (( ${input} == 1 )); then
+    if (( input == 1 )); then
         URL="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Light/complete/JetBrains%20Mono%20Nerd%20Font%20Complete%20Light.ttf?raw=true";
         break;
-    elif (( ${input} == 2 )); then
+    elif (( input == 2 )); then
         URL="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Nerd%20Font%20Complete%20Regular.ttf?raw=true";
         break;
-	elif (( ${input} == 3 )); then
+	elif (( input == 3 )); then
 		URL="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf?raw=true";
         break;
-	elif (( ${input} == 4 )); then
+	elif (( input == 4 )); then
 		URL="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf?raw=true";
         break;
-	elif (( ${input} == 5 )); then
+	elif (( input == 5 )); then
 		URL="https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf";
         break;
-	elif (( ${input} == 6 )); then
+	elif (( input == 6 )); then
 		URL="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf?raw=true";
         break;
 	elif [[ "${input}" == "q" || "${input}" == "Q" ]]; then

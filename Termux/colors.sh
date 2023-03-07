@@ -44,11 +44,11 @@ while true; do
 done;
 
 for colors in "${COLORS_DIR}/${THEME_TYPE}"/*; do
-    colors_name[count]=$( echo ${colors} | awk -F"/" '{print $NF}' )
+    colors_name[count]=$( echo "${colors}" | awk -F"/" '{print $NF}' )
     echo -e "[${green}${count}${nocol}] ${colors_name[count]}";
-    count=$(( ${count} + 1 ));
+    count=$(( count + 1 ));
 done;
-count=$(( ${count} - 1 ));
+count=$(( count - 1 ));
 echo -e "[${green}q${nocol}] Quit"
 
 while true; do
@@ -57,9 +57,9 @@ while true; do
     if [[ "${input}" == "q" || "${input}" == "Q" ]]; then
         exit 0;
     elif ! [[ ${input} =~ ^[0-9]+$ ]]; then
-        echo "${red}Please enter the right number to select color scheme!${nocol}";
-    elif (( ${input} >= 0 && ${input} <= ${count} )); then
-        eval choice=${colors_name[input]};
+        echo -e "${red}Please enter the right number to select color scheme!${nocol}";
+    elif (( input >= 0 && input <= count )); then
+        eval choice="${colors_name[input]}";
         ln -fs "${COLORS_DIR}/${THEME_TYPE}/${choice}" "${WORKING_DIR}"/colors.properties;
         echo -e "${green}Theme set sucessfully!${nocol}"
         break;
