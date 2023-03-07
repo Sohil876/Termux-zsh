@@ -30,9 +30,9 @@
 
 ### Installation
 
--   Clone this repo `git clone https://github.com/Sohil876/Termux-zsh`
--   Run setup.sh file `bash setup.sh`
--   Restart termux
+-   Clone this repo and cd to dir `git clone https://github.com/Sohil876/Termux-zsh.git && cd Termux-zsh`
+-   Run setup file with bash `bash setup.sh`
+-   Restart termux.
 -   On first start it will fetch and setup some things in background, leave it for a minute and its done.
 
 ### Update
