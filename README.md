@@ -1,6 +1,7 @@
 # Termux-ZSH
 
 \
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d6ded24b90164566a98e32c4343e543e)](https://app.codacy.com/gh/Sohil876/Termux-zsh?utm_source=github.com&utm_medium=referral&utm_content=Sohil876/Termux-zsh&utm_campaign=Badge_Grade_Settings)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/3a469a271f6b4a37b73288cc9929d0e1)](https://www.codacy.com/gh/Sohil876/Termux-zsh/dashboard?utm_source=github.com&utm_medium=referral&utm_content=Sohil876/Termux-zsh&utm_campaign=Badge_Grade)
 
 ##
