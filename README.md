@@ -10,13 +10,13 @@
 ### What it does
 
 -   Installs zsh and sets it as default shell.
--   Installs [OhMyZsh](https://github.com/ohmyzsh/ohmyzsh) framework for plugins and themes. (Dropped prezto, zinit)
--   Installs customized Powerlevel10k theme and JetBrains Mono Nerd font as default.
--   Added color scheme and font changer scripts in ~/.termux/ directory to change color schemes and fonts in termux easily.
--   Installs syntax highlighter and autosuggestion plugins (from zsh users).
+-   Installs [OhMyZsh](https://github.com/ohmyzsh/ohmyzsh) framework for plugins and themes.
+-   Installs customized [powerlevel10k](https://github.com/romkatv/powerlevel10k) theme and sets [JetBrains Mono Nerd font](https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/JetBrainsMono) as default.
+-   Added color scheme and font changer scripts in `~/.termux/` directory to change color schemes and fonts in termux easily.
+-   Installs syntax highlighter and autosuggestion plugins (from [zsh-users](https://github.com/zsh-users)).
 -   Enabled plugins by default `alias-finder command-not-found git node npm zsh-autosuggestions zsh-syntax-highlighting`, to check their usage and more available plugins [Go Here](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins)
--   Installs lf (Terminal file manager), press CTRL+O to execute lf in current directory.
--   Added command edit function, press CTRL+E to edit any command in micro text editor (you can change it to whatever text editor you prefer in `~/.zshrc` file here `export VISUAL=micro`.
+-   Installs [lf (Terminal file manager)](https://github.com/gokcehan/lf), press <kbd>Ctrl</kbd> + <kbd>O</kbd> to execute lf in current directory.
+-   Added command edit function, press <kbd>Ctrl</kbd> + <kbd>E</kbd> to edit any command in micro text editor (you can change it to whatever text editor you prefer in `~/.zshrc` file here `export VISUAL=micro`.
 
 ### Notes
 
