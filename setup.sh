@@ -10,7 +10,20 @@ nocol="\033[0m"            # Default
 
 install_dependencies() {
     echo -e "${green}Installing dependencies ...${nocol}"
-    apt update && apt install -y git zsh figlet toilet lf wget micro man
+    apt update && apt install -y git zsh figlet toilet lf curl micro man
+}
+
+configure_termux() {
+    echo -e "${green}Configuring termux ...${nocol}"
+    # Remove already existing .termux folder
+    rm -rf "${HOME)"/.termux
+    cp -r Termux "${HOME)"/.termux
+    chmod +x "${HOME)"/.termux/fonts.sh "${HOME)"/.termux/colors.sh
+    echo -e "${green}Setting IrBlack as default color scheme ...${nocol}"
+    ln -fs "${HOME)"/.termux/colors/dark/IrBlack "${HOME)"/.termux/colors.properties
+    # Replacing termuxs boring welcome message with something good looking
+    mv "${PREFIX}"/etc/motd "${PREFIX}"/etc/motd.bak
+    mv "${PREFIX}"/etc/motd.sh "${PREFIX}"/etc/motd.sh.bak
 }
 
 install_ohmyzsh() {
@@ -22,41 +35,31 @@ install_ohmyzsh() {
     git clone https://github.com/zsh-users/zsh-autosuggestions.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
     echo -e "${green}Configuring Oh-My-Zsh ...${nocol}"
-    cp -f OhMyZsh/zshrc ~/.zshrc
+    cp -f OhMyZsh/zshrc "${HOME}"/.zshrc
     if [[ "$(dpkg --print-architecture)" == "arm" ]]; then
         echo -e "Armv7 device detected${red}!${nocol} Gitstatus disabled${red}!${nocol}"
         # There's no binaries of gitstatus for armv7 right now so disable it
-        echo -e "\n# Disable gitstatus for now (Only for armv7 devices)\nPOWERLEVEL9K_DISABLE_GITSTATUS=true\n" >> ~/.zshrc
+        echo -e "\n# Disable gitstatus for now (Only for armv7 devices)\nPOWERLEVEL9K_DISABLE_GITSTATUS=true\n" >> "${HOME}"/.zshrc
     fi
-    chmod +rwx ~/.zshrc
+    chmod +rwx "${HOME}"/.zshrc
     if [[ -f "OhMyZsh/zsh_history" ]]; then
         echo -e "${green}Installing zsh history file ...${nocol}"
-        cp -f OhMyZsh/zsh_history ~/.zsh_history
-        chmod +rw ~/.zsh_history
+        cp -f OhMyZsh/zsh_history "${HOME}"/.zsh_history
+        chmod +rw "${HOME}"/.zsh_history
     fi
     if [[ -f "OhMyZsh/custom_aliases.zsh" ]]; then
         echo -e "${green}Installing custom aliases ...${nocol}"
-        cp -f OhMyZsh/custom_aliases.zsh ~/.oh-my-zsh/custom/custom_aliases.zsh
+        cp -f OhMyZsh/custom_aliases.zsh "${HOME}"/.oh-my-zsh/custom/custom_aliases.zsh
     fi
     echo -e "${green}Configuring powerlevel10k theme ...${nocol}"
-    cp -f OhMyZsh/p10k.zsh ~/.p10k.zsh
+    cp -f OhMyZsh/p10k.zsh "${HOME}"/.p10k.zsh
     echo -e "${green}Oh-My-Zsh installed!${nocol}"
 }
 
 finish_install() {
-    echo -e "${green}Configuring termux ...${nocol}"
-    # Remove already existing .termux folder
-    rm -rf ~/.termux
-    cp -r Termux ~/.termux
-    chmod +x ~/.termux/fonts.sh ~/.termux/colors.sh
-    echo -e "${green}Setting IrBlack as default color scheme ...${nocol}"
-    ln -fs ~/.termux/colors/dark/IrBlack ~/.termux/colors.properties
-    # Replacing termuxs boring welcome message with something good looking
-    mv "${PREFIX}"/etc/motd "${PREFIX}"/etc/motd.bak
-    mv "${PREFIX}"/etc/motd.sh "${PREFIX}"/etc/motd.sh.bak
     # Remove gitstatusd from cache if arm
     if [[ "$(dpkg --print-architecture)" == "arm" ]]; then
-        rm -rf ~/.cache/gitstatus
+        rm -rf "${HOME}"/.cache/gitstatus
     fi
     echo -e "${green}Setting zsh as default shell ...${nocol}"
     chsh -s zsh
@@ -74,6 +77,7 @@ echo "" # For newline
 case ${yn} in
     [Yy]* )
         install_dependencies
+        configure_termux
         install_ohmyzsh
         finish_install
         exit 0
