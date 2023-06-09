@@ -1,29 +1,12 @@
-# Welcome message
-echo "
-$(toilet -t -f smslant -F crop Termux)
-
-v${TERMUX_VERSION} | ${TERMUX_APK_RELEASE}
-
-Working with packages:
-  Search:  pkg search <query>
-  Install: pkg install <package>
-  Update:  pkg update
-Subscribing to additional repos:
-  Root:    pkg install root-repo
-  X11:     pkg install x11-repo
-For fixing any repository issues:
-  Try \e[4mtermux-change-repo\e[0m command
-"
-
-# Path to your oh-my-zsh installation.
-export ZSH="${HOME}"/.oh-my-zsh
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-${HOME}/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+# Path to your oh-my-zsh installation.
+export ZSH="${HOME}"/.oh-my-zsh
 
 # If you come from bash you might have to change your $PATH.
 export PATH="${HOME}"/bin:"${HOME}"/.local/bin:"${PREFIX}"/local/bin:"${PATH}"

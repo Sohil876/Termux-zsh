@@ -24,6 +24,8 @@ configure_termux() {
     # Replacing termuxs boring welcome message with something good looking
     mv "${PREFIX}"/etc/motd "${PREFIX}"/etc/motd.bak
     mv "${PREFIX}"/etc/motd.sh "${PREFIX}"/etc/motd.sh.bak
+    mv "${HOME}"/.termux/motd.sh "${PREFIX}"/etc/motd.sh
+    ln -sf "${PREFIX}"/etc/motd.sh "${HOME}"/.termux/motd.sh
 }
 
 install_ohmyzsh() {
