@@ -10,7 +10,7 @@ nocol="\033[0m"            # Default
 
 install_dependencies() {
     echo -e "${green}Installing dependencies ...${nocol}"
-    apt update && apt install -y git zsh figlet toilet lf curl micro man
+    apt update && apt install -y git zsh figlet toilet lf curl wget micro man
 }
 
 configure_termux() {
@@ -59,6 +59,8 @@ install_ohmyzsh() {
 }
 
 finish_install() {
+    # Configure lf file manager
+    cp -fr lf "${HOME}"/.config/lf
     # Remove gitstatusd from cache if arm
     if [[ "$(dpkg --print-architecture)" == "arm" ]]; then
         rm -rf "${HOME}"/.cache/gitstatus

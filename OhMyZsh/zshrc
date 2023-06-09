@@ -106,16 +106,10 @@ export MANPATH="${PREFIX}"/share/man:"${MANPATH}"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Use lf to switch directories and bind it to CTRL+O
-lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
-}
-bindkey -s '^o' 'lfcd\n'
+if [ -f "${HOME}/.config/lf/lfcd.sh" ]; then
+    source "${HOME}/.config/lf/lfcd.sh"
+    bindkey -s "^o" "lfcd\n" # Just change lfcd part to lf here if you don't want directory to preserve on quitting lf
+fi
 
 # Edit line in text editor with CTRL+E
 autoload edit-command-line; zle -N edit-command-line
