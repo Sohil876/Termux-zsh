@@ -59,6 +59,8 @@ install_ohmyzsh() {
 }
 
 finish_install() {
+    # Create config directory if it doesn't exist
+    mkdir -p "${HOME}/.config"
     # Configure lf file manager
     cp -fr lf "${HOME}/.config/lf"
     # Remove gitstatusd from cache if arm
