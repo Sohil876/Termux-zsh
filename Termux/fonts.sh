@@ -11,9 +11,16 @@ nocol="\033[0m"  # Default
 
 # Variables
 WORKING_DIR="${HOME}/.termux"
+URL_JBM_L="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Light/JetBrainsMonoNerdFont-Light.ttf"
+URL_JBM_R="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf"
+URL_H_R="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/HackNerdFont-Regular.ttf"
+URL_FC_R="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/FiraCode/Regular/FiraCodeNerdFont-Regular.ttf"
+URL_SCP_R="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Regular/SauceCodeProNerdFont-Regular.ttf"
+URL_MLGSNF_R="https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+URL_IT_R="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/IosevkaTerm/Regular/IosevkaTermNerdFont-Regular.ttf"
 
 echo -e "
-$(toilet -t -f smslant -F crop Font Changer)
+${green}$(toilet -t -f mini -F crop Font Changer)${nocol}
 
 Default font is ${green}JetBrains Mono Regular${nocol}
 All fonts except MesloLGS are taken from: ${green}https://github.com/ryanoasis/nerd-fonts${nocol}"
@@ -25,6 +32,8 @@ echo -e "
 [${green}4${nocol}] Fira Code Regular
 [${green}5${nocol}] MesloLGS NF Regular
 [${green}6${nocol}] Source Code Pro Regular
+[${green}7${nocol}] Iosevka Term Regular
+
 [${green}q${nocol}] Quit
 "
 
@@ -32,22 +41,25 @@ while true; do
 	read -p "Enter a number to select font: " input
 
 	if ((input == 1)); then
-		URL="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Light/complete/JetBrains%20Mono%20Nerd%20Font%20Complete%20Light.ttf?raw=true"
+		URL="${URL_JBM_L}"
 		break
 	elif ((input == 2)); then
-		URL="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/JetBrainsMono/Ligatures/Regular/complete/JetBrains%20Mono%20Nerd%20Font%20Complete%20Regular.ttf?raw=true"
+		URL="${URL_JBM_R}"
 		break
 	elif ((input == 3)); then
-		URL="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf?raw=true"
+		URL="${URL_H_R}"
 		break
 	elif ((input == 4)); then
-		URL="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf?raw=true"
+		URL="${URL_FC_R}"
 		break
 	elif ((input == 5)); then
-		URL="https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+		URL="${URL_MLGSNF_R}"
 		break
 	elif ((input == 6)); then
-		URL="https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf?raw=true"
+		URL="${URL_SCP_R}"
+		break
+	elif ((input == 7)); then
+		URL="${URL_IT_R}"
 		break
 	elif [[ "${input}" == "q" || "${input}" == "Q" ]]; then
 		break
