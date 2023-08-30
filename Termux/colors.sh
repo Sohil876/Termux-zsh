@@ -10,13 +10,13 @@ green="\e[0;32m" # Green
 nocol="\033[0m"  # Default
 
 # Variables
-WORKING_DIR=${HOME}/.termux
-COLORS_DIR=${WORKING_DIR}/colors
+WORKING_DIR="${HOME}/.termux"
+COLORS_DIR="${WORKING_DIR}/colors"
 THEME_TYPE=""
 count=1
 
 echo -e "
-$(toilet -t -f smslant -F crop Color Changer)
+${green}$(toilet -t -f mini -F crop Color Changer)${nocol}
 
 Default color scheme is ${green}IrBlack${nocol}
 All color schemes are taken from: ${green}https://github.com/mbadolato/iTerm2-Color-Schemes${nocol}"
