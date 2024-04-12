@@ -12,7 +12,7 @@ nocol="\033[0m"  # Default
 # Variables
 WORKING_DIR="${HOME}/.termux"
 MLGSNF_R="https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
-URL_NF="https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts"
+URL_NF="https://github.com/ryanoasis/nerd-fonts/raw/v3.1.1/patched-fonts"
 NF_JBM_L="${URL_NF}/JetBrainsMono/Ligatures/Light/JetBrainsMonoNerdFont-Light.ttf"
 NF_JBM_R="${URL_NF}/JetBrainsMono/Ligatures/Regular/JetBrainsMonoNerdFont-Regular.ttf"
 NF_H_R="${URL_NF}/Hack/Regular/HackNerdFont-Regular.ttf"
