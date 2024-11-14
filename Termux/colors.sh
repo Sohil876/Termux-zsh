@@ -18,7 +18,7 @@ count=1
 echo -e "
 ${green}$(toilet -t -f mini -F crop Color Changer)${nocol}
 
-Default color scheme is ${green}IrBlack${nocol}
+Default color scheme: ${green}IrBlack${nocol}
 All color schemes are taken from: ${green}https://github.com/mbadolato/iTerm2-Color-Schemes${nocol}"
 
 echo -e "
@@ -37,6 +37,7 @@ while true; do
 		THEME_TYPE="dark"
 		break
 	elif [[ "${input}" == "q" || "${input}" == "Q" ]]; then
+	    echo ""
 		exit 0
 	else
 		echo -e "${red}Please enter the right number to select the type of color scheme!${nocol}"
@@ -52,20 +53,23 @@ count=$((count - 1))
 echo -e "[${green}q${nocol}] Quit"
 
 while true; do
+    echo ""
+    
 	read -p "Enter a number, leave blank to not to change: " input
 
 	if [[ "${input}" == "q" || "${input}" == "Q" ]]; then
+	    echo ""
 		exit 0
 	elif ! [[ ${input} =~ ^[0-9]+$ ]]; then
 		echo -e "${red}Please enter the right number to select color scheme!${nocol}"
 	elif ((input >= 0 && input <= count)); then
 		eval choice="${colors_name[input]}"
 		ln -fs "${COLORS_DIR}/${THEME_TYPE}/${choice}" "${WORKING_DIR}"/colors.properties
-		echo -e "${green}Theme set sucessfully!${nocol}"
-		break
+		echo -e "${green}Theme set sucessfully!${nocol}\n"
+		termux-reload-settings
+		exit 0
 	else
 		echo -e "${red}Please enter the right number to select color scheme!${nocol}"
 	fi
 done
 
-termux-reload-settings
