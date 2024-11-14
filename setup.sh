@@ -10,7 +10,7 @@ nocol="\033[0m"  # Default
 
 install_dependencies() {
 	echo -e "${green}Installing dependencies ...${nocol}"
-	apt update && apt install -y git zsh figlet toilet lf curl wget micro man
+	apt update && apt install -y fontconfig-utils git zsh figlet toilet lf curl wget micro man
 }
 
 configure_termux() {

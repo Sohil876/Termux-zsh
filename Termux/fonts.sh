@@ -96,7 +96,13 @@ done
 
 if [[ ! -z ${URL} ]]; then
 	echo -e "${green}Downloading selected font...${nocol}"
-	wget "${URL}" -O "${WORKING_DIR}"/font.ttf.temp
+	wget "${URL}" -O "${WORKING_DIR}"/font.ttf.temp > /dev/null 2>&1
+	fc-validate "${WORKING_DIR}"/font.ttf.temp > /dev/null 2>&1
+	if [ ${?} -ne 0 ]; then
+        echo "Font file is corrupted, please download again."
+        rm "${WORKING_DIR}"/font.ttf.temp
+        exit 1
+    fi
 	mv "${WORKING_DIR}"/font.ttf.temp "${WORKING_DIR}"/font.ttf
 	echo -e "${green}Font set sucessfully!${nocol}"
 	termux-reload-settings
