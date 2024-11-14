@@ -12,7 +12,7 @@ nocol="\033[0m"  # Default
 # Variables
 WORKING_DIR="${HOME}/.termux"
 MLGSNF_VERSION="v2.3.3" # Meslo font release version from powerlevel-media (https://github.com/romkatv/powerlevel10k-media)
-NF_VERSION="v3.2.1" # Nerd font release version (https://github.com/ryanoasis/nerd-fonts)
+NF_VERSION="v3.2.1"     # Nerd font release version (https://github.com/ryanoasis/nerd-fonts)
 MLGSNF_R="https://github.com/romkatv/powerlevel10k-media/raw/${MLGSNF_VERSION}/MesloLGS%20NF%20Regular.ttf"
 URL_NF="https://github.com/ryanoasis/nerd-fonts/raw/${NF_VERSION}/patched-fonts"
 NF_JBM_L="${URL_NF}/JetBrainsMono/Ligatures/Light/JetBrainsMonoNerdFont-Light.ttf"
@@ -55,7 +55,7 @@ while true; do
 	read -p "Enter a number to select font: " input
 
 	if [[ "${input}" == "q" || "${input}" == "Q" ]]; then
-	    echo ""
+		echo ""
 		exit 0
 	elif ((input == 1)); then
 		URL="${NF_JBM_L}"
@@ -103,10 +103,10 @@ if [[ ! -z ${URL} ]]; then
 	wget "${URL}" -O "${WORKING_DIR}"/font.ttf.temp > /dev/null 2>&1
 	fc-validate "${WORKING_DIR}"/font.ttf.temp > /dev/null 2>&1
 	if [ ${?} -ne 0 ]; then
-        echo "Font file is corrupted, please download again.\n"
-        rm "${WORKING_DIR}"/font.ttf.temp
-        exit 1
-    fi
+		echo -e "Font file is corrupted, please download again.\n"
+		rm "${WORKING_DIR}"/font.ttf.temp
+		exit 1
+	fi
 	mv "${WORKING_DIR}"/font.ttf.temp "${WORKING_DIR}"/font.ttf
 	echo -e "${green}Font set sucessfully!${nocol}\n"
 	termux-reload-settings

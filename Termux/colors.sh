@@ -37,7 +37,7 @@ while true; do
 		THEME_TYPE="dark"
 		break
 	elif [[ "${input}" == "q" || "${input}" == "Q" ]]; then
-	    echo ""
+		echo ""
 		exit 0
 	else
 		echo -e "${red}Please enter the right number to select the type of color scheme!${nocol}"
@@ -53,12 +53,12 @@ count=$((count - 1))
 echo -e "[${green}q${nocol}] Quit"
 
 while true; do
-    echo ""
-    
+	echo ""
+
 	read -p "Enter a number, leave blank to not to change: " input
 
 	if [[ "${input}" == "q" || "${input}" == "Q" ]]; then
-	    echo ""
+		echo ""
 		exit 0
 	elif ! [[ ${input} =~ ^[0-9]+$ ]]; then
 		echo -e "${red}Please enter the right number to select color scheme!${nocol}"
@@ -72,4 +72,3 @@ while true; do
 		echo -e "${red}Please enter the right number to select color scheme!${nocol}"
 	fi
 done
-

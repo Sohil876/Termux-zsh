@@ -15,8 +15,10 @@ install_dependencies() {
 
 configure_termux() {
 	echo -e "${green}Configuring termux ...${nocol}"
-	# Remove already existing .termux folder
-	rm -rf "${HOME}/.termux"
+	if [ -d "${HOME}/.termux" ]; then
+		echo "Found existing .termux folder, moving to different location ${HOME}/.termux_bak for clean install"
+		mv "${HOME}/.termux" "${HOME}/.termux_bak"
+	fi
 	cp -r Termux "${HOME}/.termux"
 	chmod +x "${HOME}/.termux/fonts.sh" "${HOME}/.termux/colors.sh"
 	echo -e "${green}Setting IrBlack as default color scheme ...${nocol}"
@@ -24,8 +26,7 @@ configure_termux() {
 	# Replacing termuxs boring welcome message with something good looking
 	mv "${PREFIX}/etc/motd" "${PREFIX}/etc/motd.bak"
 	mv "${PREFIX}/etc/motd.sh" "${PREFIX}/etc/motd.sh.bak"
-	mv "${HOME}/.termux/motd.sh" "${PREFIX}/etc/motd.sh"
-	ln -sf "${PREFIX}/etc/motd.sh" "${HOME}/.termux/motd.sh"
+	ln -sf "${HOME}/.termux/motd.sh" "${PREFIX}/etc/motd.sh"
 }
 
 install_ohmyzsh() {
@@ -60,7 +61,9 @@ install_ohmyzsh() {
 
 finish_install() {
 	# Create config directory if it doesn't exist
-	mkdir -p "${HOME}/.config"
+	if [ -d "${HOME}/.config" ]; then
+		mkdir -p "${HOME}/.config"
+	fi
 	# Configure lf file manager
 	cp -fr lf "${HOME}/.config/lf"
 	# Remove gitstatusd from cache if arm
