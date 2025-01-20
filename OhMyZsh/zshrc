@@ -117,7 +117,7 @@ bindkey "^e" edit-command-line
 
 # Preferred editor for local sessions
 export EDITOR="nano"
-export VISUAL="micro"
+export VISUAL="nano"
 
 # Preferred editor for ssh sessions
 if [[ ! -z "${SSH_CONNECTION}" ]]; then
