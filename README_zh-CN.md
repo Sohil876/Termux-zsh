@@ -20,7 +20,7 @@
 *   安装语法高亮和自动建议插件（来自 [zsh-users](https://github.com/zsh-users)）。
 *   默认 `alias-finder command-not-found git node npm zsh-autosuggestions zsh-syntax-highlighting` 启用插件 ，要检查它们的使用情况和更多可用插件，[请转到此处](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins)
 *   安装并设置 [lf（终端文件管理器）](https://github.com/gokcehan/lf)，按 <kbd>Ctrl</kbd> + <kbd>O</kbd> 在当前目录中执行 lf（注意，退出 lf 时，最后一个目录位置保留在当前会话中，因此您退出 lf 时所在的目录将成为您当前的终端目录，如果您出于某种原因不想要，只需在 `~/.zshrc` 文件中搜索 `bindkey -s “^o” “lfcd\C-m”`，然后在那里将 `lfcd` 更改为 `lf`）。
-*   添加了命令编辑功能，按 <kbd>Ctrl</kbd> + <kbd>E</kbd> 可以在微文本编辑器中编辑任何命令，您可以在此处将 `~/.zshrc` 文件更改为您喜欢的任何文本编辑器 `export VISUAL=“micro”。`
+*   添加了命令编辑功能，按 <kbd>Ctrl</kbd> + <kbd>E</kbd> 可以在微文本编辑器中编辑任何命令，您可以在此处将 `~/.zshrc` 文件更改为您喜欢的任何文本编辑器 `export VISUAL=“nano”。`
 
 ### 笔记
 
