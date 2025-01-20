@@ -20,7 +20,7 @@ English
 -   Installs syntax highlighter and autosuggestion plugins (from [zsh-users](https://github.com/zsh-users)).
 -   Enabled plugins by default `alias-finder command-not-found git node npm zsh-autosuggestions zsh-syntax-highlighting`, to check their usage and more available plugins [Go Here](https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins)
 -   Installs and sets up [lf (Terminal file manager)](https://github.com/gokcehan/lf), press <kbd>Ctrl</kbd> + <kbd>O</kbd> to execute lf in current directory (NOTE, last directory location is preserved in current session on quiting lf, so the directory you were in when you quit lf becomes your current terminal directory, if you don't want this for some reason just search for `bindkey -s "^o" "lfcd\C-m"` in `~/.zshrc` file and just change `lfcd` to `lf` in there).
--   Added command edit function, press <kbd>Ctrl</kbd> + <kbd>E</kbd> to edit any command in micro text editor, you can change it to whatever text editor you prefer in `~/.zshrc` file here `export VISUAL="micro"`.
+-   Added command edit function, press <kbd>Ctrl</kbd> + <kbd>E</kbd> to edit any command in micro text editor, you can change it to whatever text editor you prefer in `~/.zshrc` file here `export VISUAL="nano"`.
 
 ### Notes
 
