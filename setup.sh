@@ -13,7 +13,7 @@ install_dependencies() {
 }
 
 configure_mirrors() {
-    read -p "Do you need to use mirrors? | 是否需要使用镜像站？[Y/n] " choice
+    read -p "${green}Do you need to use mirrors?${nocol} | ${green}是否需要使用镜像站？${nocol}[Y/n]" choice
     case "$choice" in
         [Yy]|"")
             USE_MIRROR=1
