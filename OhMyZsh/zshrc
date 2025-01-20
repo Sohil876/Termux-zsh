@@ -116,7 +116,7 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey "^e" edit-command-line
 
 # Preferred editor for local sessions
-export EDITOR="micro"
+export EDITOR="nano"
 export VISUAL="micro"
 
 # Preferred editor for ssh sessions

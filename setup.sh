@@ -9,12 +9,13 @@ nocol="\033[0m"  # Default | 默认
 
 install_dependencies() {
 	echo -e "${green}Installing dependencies...${nocol} | ${green}正在安装依赖项…${nocol}"
-	apt update && apt install -y fontconfig-utils git zsh figlet toilet lf curl wget micro man
+	apt update && apt install -y fontconfig-utils git zsh figlet toilet lf curl wget man
 }
 
 configure_mirrors() {
-    read -p "${green}Do you need to use mirrors?${nocol} | ${green}是否需要使用镜像站？${nocol}[Y/n]" choice
-    case "$choice" in
+    echo -e "${green}Do you need to use mirrors?${nocol} | ${green}是否需要使用镜像站？${nocol}[Y/n]"
+    read -p "" choice
+    case "${choice}" in
         [Yy]|"")
             USE_MIRROR=1
             ;;
