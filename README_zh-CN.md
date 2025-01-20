@@ -50,7 +50,7 @@ apt update && apt install -y git && git clone https://github.com/CMSZ001/Termux-
 ```
 * Gitee
 ```bash
-apt update && apt install -y git && git clone https://github.com/CMSZ001/Termux-zsh.git && cd Termux-zsh && bash setup.sh
+apt update && apt install -y git && git clone https://gitee.com/CMSZ001/Termux-zsh.git && cd Termux-zsh && bash setup.sh
 ```
 
 ### 更新
