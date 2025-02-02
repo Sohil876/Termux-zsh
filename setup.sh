@@ -47,7 +47,7 @@ configure_termux() {
 install_ohmyzsh() {
 	echo -e "${green}Installing Oh-My-Zsh...${nocol} | ${green}正在安装 Oh-My-Zsh…${nocol}"
 	if [[ $USE_MIRROR -eq 1 ]]; then
-	    git clone https://mirrors.tuna.tsinghua.edu.cn/git/ohmyzsh.git "${HOME}/.oh-my-zsh"
+	    git clone https://mirrors.cernet.edu.cn/ohmyzsh.git "${HOME}/.oh-my-zsh"
     else
 	    git clone https://github.com/ohmyzsh/ohmyzsh.git "${HOME}/.oh-my-zsh"
 	fi
