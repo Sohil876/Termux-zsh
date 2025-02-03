@@ -47,8 +47,8 @@ configure_termux() {
 install_ohmyzsh() {
 	echo -e "${green}Installing Oh-My-Zsh...${nocol} | ${green}正在安装 Oh-My-Zsh…${nocol}"
 	if [[ $USE_MIRROR -eq 1 ]]; then
-	    git clone https://mirrors.cernet.edu.cn/ohmyzsh.git "${HOME}/.oh-my-zsh"
-    else
+	    git clone https://mirrors.tuna.tsinghua.edu.cn/git/ohmyzsh.git "${HOME}/.oh-my-zsh"
+        else
 	    git clone https://github.com/ohmyzsh/ohmyzsh.git "${HOME}/.oh-my-zsh"
 	fi
 
@@ -66,11 +66,11 @@ install_ohmyzsh() {
 	    git clone https://github.com/zsh-users/zsh-autosuggestions.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
     fi
 
-    if [[ $USE_MIRROR -eq 1 ]]; then
+	if [[ $USE_MIRROR -eq 1 ]]; then
         git clone https://gitee.com/mirrors/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
-    else
-	    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
-	fi
+	else
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
+    fi
 
 	echo -e "${green}Configuring Oh-My-Zsh...${nocol} | ${green}正在配置 Oh-My-Zsh…${nocol}"
 	cp -f OhMyZsh/zshrc "${HOME}/.zshrc"
