@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 ## Termux-Zsh
 #
@@ -8,9 +8,16 @@ red="\e[0;31m"   # Red
 green="\e[0;32m" # Green
 nocol="\033[0m"  # Default
 
+# Exit on error and trace commands
+set -e
+# set -x  # Uncomment for debugging
+
 install_dependencies() {
 	echo -e "${green}Installing dependencies ...${nocol}"
-	apt update && apt install -y fontconfig-utils git zsh figlet toilet lf curl wget micro man
+	apt update && apt install -y fontconfig-utils git zsh figlet toilet lf curl wget micro man || {
+		echo -e "${red}Failed to install dependencies!${nocol}"
+		exit 1
+	}
 }
 
 configure_termux() {
@@ -19,7 +26,10 @@ configure_termux() {
 		echo "Found existing .termux folder, moving to different location ${HOME}/.termux_bak for clean install"
 		mv "${HOME}/.termux" "${HOME}/.termux_bak"
 	fi
-	cp -r Termux "${HOME}/.termux"
+	cp -r Termux "${HOME}/.termux" || {
+		echo -e "${red}Failed to copy Termux folder!${nocol}"
+		exit 1
+	}
 	chmod +x "${HOME}/.termux/fonts.sh" "${HOME}/.termux/colors.sh"
 	echo -e "${green}Setting IrBlack as default color scheme ...${nocol}"
 	ln -fs "${HOME}/.termux/colors/dark/IrBlack" "${HOME}/.termux/colors.properties"
@@ -61,7 +71,7 @@ install_ohmyzsh() {
 
 finish_install() {
 	# Create config directory if it doesn't exist
-	if [ -d "${HOME}/.config" ]; then
+	if [ ! -d "${HOME}/.config" ]; then
 		mkdir -p "${HOME}/.config"
 	fi
 	# Configure lf file manager
@@ -79,25 +89,29 @@ finish_install() {
 	echo -e "${green}Please restart Termux!${nocol}"
 }
 
-# Start installation
-echo -e "${green}Install Oh-My-Zsh? [Y/n]${nocol}"
-read -p "" -n 1 -r yn
-echo "" # For newline
-case ${yn} in
-	[Yy]*)
-		install_dependencies
-		configure_termux
-		install_ohmyzsh
-		finish_install
-		exit 0
-		;;
-	[Nn]*)
-		echo -e "${red}Installation aborted!${nocol}"
-		exit 1
-		;;
-esac
+main() {
+	# Start installation
+	echo -e "${green}Install Oh-My-Zsh? [Y/n]${nocol}"
+	read -p "" -n 1 -r yn
+	echo "" # For newline
+	case ${yn} in
+		[Yy]*)
+			install_dependencies
+			configure_termux
+			install_ohmyzsh
+			finish_install
+			exit 0
+			;;
+		[Nn]*)
+			echo -e "${red}Installation aborted!${nocol}"
+			exit 1
+			;;
+		*)
+			echo -e "${red}Invalid choice!${nocol}"
+			echo ""
+			exit 1
+			;;
+	esac
+}
 
-# Error msg for invalid choice
-echo -e "${red}Invalid choice!${nocol}"
-echo ""
-exit 1
+main "$@"

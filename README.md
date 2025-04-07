@@ -28,6 +28,7 @@
 -   Checkout [OhMyZsh Cheatsheet](https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet) for some quick usefull tricks.
 -   Checkout [OhMyZsh Wiki](https://github.com/ohmyzsh/ohmyzsh/wiki/Home) to see how to customize it, add plugins and themes.
 -   Checkout [lf-basics](https://github.com/gokcehan/lf/wiki/Tutorial#basics) to learn how to use the lf file manager and customize it.
+-   Checkout [iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/termux) all color schemes are taken from here, you can try more themes from here.
 
 ### Installation
 
