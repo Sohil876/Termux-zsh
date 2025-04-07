@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 ## Termux-zsh
 ## Font changer
@@ -54,7 +54,7 @@ echo -e "
 while true; do
 	read -p "Enter a number to select font: " input
 
-	if [[ "${input}" == "q" || "${input}" == "Q" ]]; then
+	if [[ ${input} == "q" || ${input} == "Q" ]]; then
 		echo ""
 		exit 0
 	elif ((input == 1)); then
@@ -98,7 +98,7 @@ while true; do
 	fi
 done
 
-if [[ ! -z ${URL} ]]; then
+if [[ -n ${URL} ]]; then
 	echo -e "${green}Downloading selected font...${nocol}"
 	wget "${URL}" -O "${WORKING_DIR}"/font.ttf.temp > /dev/null 2>&1
 	fc-validate "${WORKING_DIR}"/font.ttf.temp > /dev/null 2>&1
