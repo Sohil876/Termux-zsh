@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 ## Termux-Zsh
 
@@ -7,13 +7,20 @@ red="\e[0;31m"   # Red  | 红色
 green="\e[0;32m" # Green | 绿色
 nocol="\033[0m"  # Default | 默认
 
+# Exit on error and trace commands
+set -e
+# set -x  # Uncomment for debugging
+
 install_dependencies() {
 	echo -e "${green}Installing dependencies...${nocol} | ${green}正在安装依赖项…${nocol}"
-	apt update && apt install -y fontconfig-utils git zsh figlet toilet lf curl wget man
+	apt update && apt install -y fontconfig-utils git zsh figlet toilet lf curl wget micro man || {
+ 		echo -e "${red}Failed to install dependencies!${nocol}"
+ 		exit 1
+ 	}
 }
 
 configure_mirrors() {
-    echo -e "${green}Do you need to use mirrors?${nocol} | ${green}是否需要使用镜像站？${nocol}[Y/n]"
+    echo -e "${green}Do you need to use mirrors?${nocol} | ${green}是否需要使用镜像？${nocol}[Y/n]"
     read -p "" choice
     case "${choice}" in
         [Yy]|"")
@@ -34,7 +41,10 @@ configure_termux() {
 		echo "Found existing.termux folder, moving to different location ${HOME}/.termux_bak for clean install | 发现现有的 .termux 文件夹，为了全新安装，将其移动到 ${HOME}/.termux_bak"
 		mv "${HOME}/.termux" "${HOME}/.termux_bak"
 	fi
-	cp -r Termux "${HOME}/.termux"
+	cp -r Termux "${HOME}/.termux" || {
+ 		echo -e "${red}Failed to copy Termux folder!${nocol}"
+ 		exit 1
+ 	}
 	chmod +x "${HOME}/.termux/fonts.sh" "${HOME}/.termux/colors.sh"
 	echo -e "${green}Setting IrBlack as default color scheme...${nocol} | ${green}正在将 IrBlack 设置为默认颜色方案...${nocol}"
 	ln -fs "${HOME}/.termux/colors/dark/IrBlack" "${HOME}/.termux/colors.properties"
@@ -115,25 +125,33 @@ finish_install() {
 }
 
 # Start installation | 开始安装
-echo -e "${green}Install Oh-My-Zsh?${nocol} | ${green}是否安装 Oh-My-Zsh？[Y/n]${nocol}"
-read -p "" -n 1 -r yn
-echo "" # For newline | 为了添加新行
-case ${yn} in
-	[Yy]* | "")
-		install_dependencies
-		configure_mirrors
-		configure_termux
-		install_ohmyzsh
-		finish_install
-		exit 0
-		;;
-	[Nn]*)
-		echo -e "${red}Installation aborted!${nocol} | ${red}安装已被中止！${nocol}"
-		exit 1
-		;;
-	*)
-		echo -e "${red}Invalid choice!${nocol} | ${red}无效的选择！${nocol}"
-		echo ""
-		exit 1
-		;;
-esac
+main() {
+    echo -e "${green}Install Oh-My-Zsh?${nocol} | ${green}是否安装 Oh-My-Zsh？[Y/n]${nocol}"
+	read -p "" -n 1 -r yn
+    echo "" # For newline | 为了添加新行
+	case ${yn} in
+        [Yy]*)
+            install_dependencies
+	        configure_mirrors
+            configure_termux
+            install_ohmyzsh
+            finish_install
+            exit 0
+            ;;
+        [Nn]*)
+            echo -e "${red}Installation aborted!${nocol} | ${red}安装已被中止！${nocol}"
+            exit 1
+            ;;
+        *)
+		    echo -e "${red}Invalid choice!${nocol} | ${red}无效的选择！${nocol}"
+            echo ""
+            exit 1
+            ;;
+        esac
+}
+
+# Error msg for invalid choice | 无效选择的错误消息
+echo -e "${red}Invalid choice!${nocol} | ${red}无效的选择！${nocol}"
+echo ""
+exit 1
+main "$@"
