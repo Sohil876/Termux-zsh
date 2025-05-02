@@ -150,8 +150,4 @@ main() {
         esac
 }
 
-# Error msg for invalid choice | 无效选择的错误消息
-echo -e "${red}Invalid choice!${nocol} | ${red}无效的选择！${nocol}"
-echo ""
-exit 1
 main "$@"
