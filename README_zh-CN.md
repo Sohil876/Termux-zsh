@@ -32,6 +32,7 @@
 *   查看 [OhMyZsh Cheatsheet](https://github.com/ohmyzsh/ohmyzsh/wiki/Cheatsheet) 以获取一些快速有用的技巧。
 *   查看 [OhMyZsh Wiki](https://github.com/ohmyzsh/ohmyzsh/wiki/Home) 了解如何自定义它、添加插件和主题。
 *   查看 [lf-basics](https://github.com/gokcehan/lf/wiki/Tutorial#basics) 了解如何使用 lf 文件管理器并对其进行自定义。
+*   查看[iTerm2-Color-Schemes](https://github.com/mbadolato/iTerm2-Color-Schemes/tree/master/termux))。所有配色方案都来源于此，您可以在这里尝试更多主题。
 
 ### 安装
 
