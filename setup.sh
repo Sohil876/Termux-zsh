@@ -64,7 +64,7 @@ install_ohmyzsh() {
 
 	echo -e "${green}Installing powerlevel10k theme...${nocol} | ${green}正在安装 powerlevel10k 主题…${nocol}"
 	if [[ $USE_MIRROR -eq 1 ]]; then
-	    git clone --depth=1 https://gitee.com/mirrors/powerlevel10k.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/themes/powerlevel10k
+	    git clone --depth=1 https://github.cmsz.dpdns.org/https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/themes/powerlevel10k
 	else
 	    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/themes/powerlevel10k
 	fi
