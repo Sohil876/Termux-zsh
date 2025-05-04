@@ -57,27 +57,27 @@ configure_termux() {
 install_ohmyzsh() {
 	echo -e "${green}Installing Oh-My-Zsh...${nocol} | ${green}正在安装 Oh-My-Zsh…${nocol}"
 	if [[ $USE_MIRROR -eq 1 ]]; then
-	    git clone https://mirrors.tuna.tsinghua.edu.cn/git/ohmyzsh.git "${HOME}/.oh-my-zsh"
+	    git clone https://mirror.nju.edu.cn/git/ohmyzsh.git "${HOME}/.oh-my-zsh"
         else
 	    git clone https://github.com/ohmyzsh/ohmyzsh.git "${HOME}/.oh-my-zsh"
 	fi
 
 	echo -e "${green}Installing powerlevel10k theme...${nocol} | ${green}正在安装 powerlevel10k 主题…${nocol}"
 	if [[ $USE_MIRROR -eq 1 ]]; then
-	    git clone --depth=1 https://github.cmsz.dpdns.org/https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/themes/powerlevel10k
+	    git clone --depth=1 https://mirror.nju.edu.cn/git/powerlevel10k.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/themes/powerlevel10k
 	else
 	    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/themes/powerlevel10k
 	fi
 
 	echo -e "${green}Installing custom plugins...${nocol} | ${green}正在安装自定义插件…${nocol}"
 	if [[ $USE_MIRROR -eq 1 ]]; then
-	    git clone https://gitee.com/mirrors/zsh-autosuggestions.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
+	    git clone https://mirror.nju.edu.cn/git/zsh-autosuggestions.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
 	else
 	    git clone https://github.com/zsh-users/zsh-autosuggestions.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/plugins/zsh-autosuggestions
     fi
 
 	if [[ $USE_MIRROR -eq 1 ]]; then
-        git clone https://gitee.com/mirrors/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
+        git clone https://mirror.nju.edu.cn/git/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
 	else
         git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}"/plugins/zsh-syntax-highlighting
     fi
