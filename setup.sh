@@ -42,7 +42,7 @@ configure_termux() {
 		mv "${HOME}/.termux" "${HOME}/.termux_bak"
 	fi
 	cp -r Termux "${HOME}/.termux" || {
- 		echo -e "${red}Failed to copy Termux folder!${nocol}"
+ 		echo -e "${red}Failed to copy Termux folder! | 复制 Termux 文件夹失败！${nocol}"
  		exit 1
  	}
 	chmod +x "${HOME}/.termux/fonts.sh" "${HOME}/.termux/colors.sh"
