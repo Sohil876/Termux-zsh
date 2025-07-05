@@ -10,7 +10,7 @@ n
 Available languages
 Usage
 Options
-<language_code>
+language_code
 Set language (e.g., 'en' for English)
 Show list of available languages
 Show this help message

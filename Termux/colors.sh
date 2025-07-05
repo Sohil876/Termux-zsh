@@ -52,9 +52,9 @@ while [[ ${#} -gt 0 ]]; do
 			exit 0
 			;;
 		-h)
-			printf "${green}${COMMON_STRINGS[10]}${nocol}: colors.sh [-l ${COMMON_STRINGS[12]}]\n"
+			printf "${green}${COMMON_STRINGS[10]}${nocol}: color-changer [-l <${COMMON_STRINGS[12]}>]\n"
 			printf "${green}${COMMON_STRINGS[11]}${nocol}:\n"
-			printf "    -l ${COMMON_STRINGS[12]} ${COMMON_STRINGS[13]}\n"
+			printf "    -l <${COMMON_STRINGS[12]}> ${COMMON_STRINGS[13]}\n"
 			printf "    -ls                ${COMMON_STRINGS[14]}\n"
 			printf "    -h                 ${COMMON_STRINGS[15]}\n"
 			exit 0
@@ -76,13 +76,16 @@ elif [ ! -d "${COLORS_DIR}/dark" ]; then
 	exit 1
 fi
 
-eval "printf \"\n${green}$(toilet -t -f mini -F crop Color Changer)${nocol}\n\""
+printf "\n${green}$(toilet -t -f mini -F crop Color Changer)${nocol}\n"
 printf "\n${LANG_STRINGS[3]} ${green}IrBlack${nocol}"
 printf "\n${LANG_STRINGS[4]} ${green}https://github.com/mbadolato/iTerm2-Color-Schemes${nocol}\n"
 
-printf "\n[${green}1${nocol}] ${LANG_STRINGS[5]}"
-printf "\n[${green}2${nocol}] ${LANG_STRINGS[6]}"
-printf "\n[${green}${COMMON_STRINGS[0]}${nocol}] ${COMMON_STRINGS[2]}\n"
+printf "
+[${green}1${nocol}] ${LANG_STRINGS[5]}
+[${green}2${nocol}] ${LANG_STRINGS[6]}
+
+[${green}${COMMON_STRINGS[1]}${nocol}] ${COMMON_STRINGS[2]}
+"
 
 while true; do
 	printf "\n"
@@ -108,7 +111,7 @@ for colors in "${COLORS_DIR}/${THEME_TYPE}"/*; do
 	count=$((count + 1))
 done
 count=$((count - 1))
-printf "[${green}${COMMON_STRINGS[0]}${nocol}] ${COMMON_STRINGS[2]}\n"
+printf "\n[${green}${COMMON_STRINGS[1]}${nocol}] ${COMMON_STRINGS[2]}\n"
 
 while true; do
 	printf "\n"
