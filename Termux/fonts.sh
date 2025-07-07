@@ -10,7 +10,7 @@ green="\e[0;32m" # Green
 nocol="\033[0m"  # Default
 
 # Variables
-WORKING_DIR="${HOME}/.termux"
+WORKING_DIR="$(dirname "${BASH_SOURCE[0]}")"
 LANG_CODE="en"
 MLGSNF_VERSION="v2.3.3" # Meslo font release version from powerlevel-media (https://github.com/romkatv/powerlevel10k-media)
 NF_VERSION="v3.2.1"     # Nerd font release version (https://github.com/ryanoasis/nerd-fonts)

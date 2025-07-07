@@ -10,7 +10,7 @@ green="\e[0;32m" # Green
 nocol="\033[0m"  # Default
 
 # Variables
-WORKING_DIR="${HOME}/.termux"
+WORKING_DIR="$(dirname "${BASH_SOURCE[0]}")"
 COLORS_DIR="${WORKING_DIR}/colors"
 THEME_TYPE=""
 count=1
