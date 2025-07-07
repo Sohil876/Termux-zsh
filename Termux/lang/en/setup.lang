@@ -1,0 +1,21 @@
+Installing dependencies
+Failed to install dependencies
+Configuring termux
+Found existing .termux folder, moving to different location for clean install
+Failed to copy Termux folder
+Setting IrBlack as default color scheme
+Installing Oh-My-Zsh
+Installing powerlevel10k theme
+Installing custom plugins
+Configuring Oh-My-Zsh
+Armv7 device detected, Gitstatus is disabled
+Setting up provided zsh history file
+Setting up provided custom aliases
+Configuring powerlevel10k theme
+Oh-My-Zsh installed
+Setting zsh as default shell
+Setup Completed
+Please restart Termux
+Install
+Installation aborted
+Invalid choice

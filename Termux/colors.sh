@@ -17,20 +17,20 @@ count=1
 LANG_CODE="en"
 
 # Pre-scan all arguments for -l <lang_code> before loading lang files
-for ((i = 1; i <= $#; i++)); do
+for ((i = 1; i <= "${#}"; i++)); do
 	arg="${!i}"
 	next_index=$((i + 1))
 	next_arg="${!next_index}"
 
-	if [[ $arg == "-l" ]]; then
-		if [[ -z $next_arg || $next_arg == -* ]]; then
+	if [[ ${arg} == "-l" ]]; then
+		if [[ -z ${next_arg} || ${next_arg} == -* ]]; then
 			printf "${red}Missing language code after -l|--lang\n"
 			printf "Use -ls to list available languages or -h for help${nocol}\n"
 			exit 1
 		fi
 		lang_input="${next_arg,,}"
-		if [[ -d "$WORKING_DIR/lang/$lang_input" ]]; then
-			LANG_CODE="$lang_input"
+		if [[ -d "${WORKING_DIR}/lang/${lang_input}" ]]; then
+			LANG_CODE="${lang_input}"
 		else
 			printf "${red}No localization found for language code${nocol} ${lang_input}\n"
 			printf "${red}Check available languages with -ls or use -h for help${nocol}\n"
