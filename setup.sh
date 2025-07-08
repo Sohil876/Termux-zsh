@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-## Termux-Zsh
+## Termux-zsh
 #
 
 # Color Codes
@@ -67,7 +67,11 @@ done
 
 install_dependencies() {
 	printf "${green}${LANG_STRINGS[0]}...${nocol}\n"
-	apt update && apt install -y fontconfig-utils git zsh figlet toilet lf curl wget micro man || {
+	apt update || {
+		printf "${red}${LANG_STRINGS[1]}!${nocol}\n"
+		exit 1
+	}
+	apt install -y termux-tools coreutils less fontconfig-utils git zsh figlet toilet lf curl wget micro man || {
 		printf "${red}${LANG_STRINGS[1]}!${nocol}\n"
 		exit 1
 	}
@@ -76,10 +80,11 @@ install_dependencies() {
 configure_termux() {
 	printf "${green}${LANG_STRINGS[2]}...${nocol}\n"
 	if [ -d "${HOME}/.termux" ]; then
-		printf "${green}${LANG_STRINGS[3]}${nocol}: ${HOME}/.termux_bak\n"
-		mv "${HOME}/.termux" "${HOME}/.termux_bak"
+		install_date_time="$(date +"%Y-%m-%d_%H-%M-%S")"
+		printf "${green}${LANG_STRINGS[3]}${nocol}: ${HOME}/.termux_bak_${install_date_time}\n"
+		mv "${HOME}/.termux" "${HOME}/.termux_bak_${install_date_time}"
 	fi
-	cp -r Termux "${HOME}/.termux" || {
+	cp -r "${WORKING_DIR}/Termux" "${HOME}/.termux" || {
 		printf "${red}${LANG_STRINGS[4]}!${nocol}\n"
 		exit 1
 	}
@@ -88,10 +93,10 @@ configure_termux() {
 	ln -fs "${HOME}/.termux/colors/dark/IrBlack" "${HOME}/.termux/colors.properties"
 	# Replacing termuxs boring welcome message with something good looking
 	if [[ -f "${PREFIX}/etc/motd" ]]; then
-	    mv "${PREFIX}/etc/motd" "${PREFIX}/etc/motd.bak"
+		mv "${PREFIX}/etc/motd" "${PREFIX}/etc/motd.bak"
 	fi
 	if [[ -f "${PREFIX}/etc/motd.sh" ]]; then
-	    mv "${PREFIX}/etc/motd.sh" "${PREFIX}/etc/motd.sh.bak"
+		mv "${PREFIX}/etc/motd.sh" "${PREFIX}/etc/motd.sh.bak"
 	fi
 	ln -sf "${HOME}/.termux/motd.sh" "${PREFIX}/etc/motd.sh"
 }
@@ -105,24 +110,24 @@ install_ohmyzsh() {
 	git clone https://github.com/zsh-users/zsh-autosuggestions.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
 	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
 	printf "${green}${LANG_STRINGS[9]}...${nocol}\n"
-	cp -f OhMyZsh/zshrc "${HOME}/.zshrc"
+	cp -f "${WORKING_DIR}/OhMyZsh/zshrc" "${HOME}/.zshrc"
 	if [[ "$(dpkg --print-architecture)" == "arm" ]]; then
 		printf "${green}${LANG_STRINGS[10]}!${nocol}\n"
 		# There's no binaries of gitstatus for armv7 right now so disable it
 		printf "\n# Disable gitstatus for now (Only for armv7 devices)\nPOWERLEVEL9K_DISABLE_GITSTATUS=true\n" >> "${HOME}/.zshrc"
 	fi
 	chmod +rwx "${HOME}/.zshrc"
-	if [[ -f "OhMyZsh/zsh_history" ]]; then
+	if [[ -f "${WORKING_DIR}/OhMyZsh/zsh_history" ]]; then
 		printf "${green}${LANG_STRINGS[11]}...${nocol}\n"
-		cp -f OhMyZsh/zsh_history "${HOME}/.zsh_history"
+		cp -f "${WORKING_DIR}/OhMyZsh/zsh_history" "${HOME}/.zsh_history"
 		chmod +rw "${HOME}/.zsh_history"
 	fi
-	if [[ -f "OhMyZsh/custom_aliases.zsh" ]]; then
+	if [[ -f "${WORKING_DIR}/OhMyZsh/custom_aliases.zsh" ]]; then
 		printf "${green}${LANG_STRINGS[12]}...${nocol}\n"
-		cp -f OhMyZsh/custom_aliases.zsh "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/custom_aliases.zsh"
+		cp -f "${WORKING_DIR}/OhMyZsh/custom_aliases.zsh" "${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/custom_aliases.zsh"
 	fi
 	printf "${green}${LANG_STRINGS[13]}...${nocol}\n"
-	cp -f OhMyZsh/p10k.zsh "${HOME}/.p10k.zsh"
+	cp -f "${WORKING_DIR}/OhMyZsh/p10k.zsh" "${HOME}/.p10k.zsh"
 	printf "${green}${LANG_STRINGS[14]}!${nocol}\n"
 }
 
@@ -132,7 +137,7 @@ finish_install() {
 		mkdir -p "${HOME}/.config"
 	fi
 	# Configure lf file manager
-	cp -fr lf "${HOME}/.config/lf"
+	cp -fr "${WORKING_DIR}/lf" "${HOME}/.config/lf"
 	# Remove gitstatusd from cache if arm
 	if [[ "$(dpkg --print-architecture)" == "arm" ]]; then
 		rm -rf "${HOME}/.cache/gitstatus"

@@ -1,4 +1,4 @@
-# Termux-ZSH
+# Termux-zsh
 
 \
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/598b9e66297c4323a25dada99d377a11)](https://app.codacy.com/gh/Sohil876/Termux-zsh/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
@@ -32,9 +32,8 @@
 
 ### Installation
 
--   First update termux packages to latest versions by entering `pkg update` , you can answer `Y` to any prompts afterwards if its a clean termux install.
--   Install git `pkg install git`
--   Clone this repo and cd to dir `git clone https://github.com/Sohil876/Termux-zsh.git && cd Termux-zsh`
+-   First update termux package index by entering `pkg update` , you can answer `Y` to any prompts afterwards if its a clean termux install.
+-   Install git `pkg install git` then clone this repo and cd to dir `git clone https://github.com/Sohil876/Termux-zsh.git && cd Termux-zsh`
 -   Run setup file with bash `bash setup.sh`
 -   It will ask for storage permission, give it.
 -   Restart termux after setup is done.
