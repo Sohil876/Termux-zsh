@@ -10,7 +10,8 @@ green="\e[0;32m" # Green
 nocol="\033[0m"  # Default
 
 # Variables
-WORKING_DIR="${HOME}/.termux"
+WORKING_DIR="$(dirname "${BASH_SOURCE[0]}")"
+LANG_CODE="en"
 MLGSNF_VERSION="v2.3.3" # Meslo font release version from powerlevel-media (https://github.com/romkatv/powerlevel10k-media)
 NF_VERSION="v3.2.1"     # Nerd font release version (https://github.com/ryanoasis/nerd-fonts)
 MLGSNF_R="https://github.com/romkatv/powerlevel10k-media/raw/${MLGSNF_VERSION}/MesloLGS%20NF%20Regular.ttf"
@@ -27,14 +28,61 @@ NF_CC_R="${URL_NF}/CascadiaCode/Regular/CaskaydiaCoveNerdFont-Regular.ttf"
 NF_BM_R="${URL_NF}/IBMPlexMono/Mono/BlexMonoNerdFontMono-Regular.ttf"
 NF_AP_R="${URL_NF}/AnonymousPro/Regular/AnonymiceProNerdFont-Regular.ttf"
 
-echo -e "
-${green}$(toilet -t -f mini -F crop Font Changer)${nocol}
+# Pre-scan all arguments for -l <lang_code> before loading lang files
+for ((i = 1; i <= "${#}"; i++)); do
+	arg="${!i}"
+	next_index=$((i + 1))
+	next_arg="${!next_index}"
 
-Nerd Fonts: ${green}${NF_VERSION}${nocol}
-Meslo LGS fonts: ${green}${MLGSNF_VERSION}${nocol}
-Default font: ${green}JetBrains Mono Regular${nocol}"
+	if [[ ${arg} == "-l" ]]; then
+		if [[ -z ${next_arg} || ${next_arg} == -* ]]; then
+			printf "${red}Missing language code after -l|--lang\n"
+			printf "Use -ls to list available languages or -h for help${nocol}\n"
+			exit 1
+		fi
+		lang_input="${next_arg,,}"
+		if [[ -d "${WORKING_DIR}/lang/${lang_input}" ]]; then
+			LANG_CODE="${lang_input}"
+		else
+			printf "${red}No localization found for language code${nocol} ${lang_input}\n"
+			printf "${red}Check available languages with -ls or use -h for help${nocol}\n"
+			exit 1
+		fi
+		break
+	fi
+done
 
-echo -e "
+# Load lang files
+mapfile -t LANG_STRINGS < "${WORKING_DIR}/lang/${LANG_CODE}/fonts.lang"
+mapfile -t COMMON_STRINGS < "${WORKING_DIR}/lang/${LANG_CODE}/common.lang"
+
+while [[ ${#} -gt 0 ]]; do
+	case "${1}" in
+		-ls)
+			printf "${green}${COMMON_STRINGS[9]}${nocol}:\n"
+			find "${WORKING_DIR}/lang" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;
+			exit 0
+			;;
+		-h)
+			printf "${green}${COMMON_STRINGS[10]}${nocol}: font-changer [-l <${COMMON_STRINGS[12]}>]\n"
+			printf "${green}${COMMON_STRINGS[11]}${nocol}:\n"
+			printf "    -l <${COMMON_STRINGS[12]}> ${COMMON_STRINGS[13]}\n"
+			printf "    -ls                ${COMMON_STRINGS[14]}\n"
+			printf "    -h                 ${COMMON_STRINGS[15]}\n"
+			exit 0
+			;;
+		*)
+			shift
+			;;
+	esac
+done
+
+printf "\n${green}$(toilet -t -f mini -F crop Font Changer)${nocol}\n"
+printf "\nNerd Fonts: ${green}${NF_VERSION}${nocol}\n"
+printf "Meslo LGS fonts: ${green}${MLGSNF_VERSION}${nocol}\n"
+printf "${LANG_STRINGS[0]}: ${green}JetBrains Mono Regular${nocol}\n"
+
+printf "
 [${green}1${nocol}] JetBrains Mono (Light)
 [${green}2${nocol}] JetBrains Mono (Regular)
 [${green}3${nocol}] Hack (Regular)
@@ -48,11 +96,12 @@ echo -e "
 [${green}11${nocol}] IBM Plex Mono (Regular)
 [${green}12${nocol}] Anonymous Pro (Regular)
 
-[${green}q${nocol}] Quit
+[${green}${COMMON_STRINGS[1]}${nocol}] ${COMMON_STRINGS[2]}
 "
 
 while true; do
-	read -p "Enter a number to select font: " input
+	printf "\n"
+	read -p "${LANG_STRINGS[1]}: " input
 
 	if [[ ${input} == "q" || ${input} == "Q" ]]; then
 		echo ""
@@ -94,20 +143,20 @@ while true; do
 		URL="${NF_AP_R}"
 		break
 	else
-		echo -e "${red}Please enter the right number to select font!${nocol}"
+		printf "${red}${LANG_STRINGS[2]}!${nocol}\n"
 	fi
 done
 
 if [[ -n ${URL} ]]; then
-	echo -e "${green}Downloading selected font...${nocol}"
-	wget "${URL}" -O "${WORKING_DIR}"/font.ttf.temp > /dev/null 2>&1
-	fc-validate "${WORKING_DIR}"/font.ttf.temp > /dev/null 2>&1
+	printf "${green}${LANG_STRINGS[3]}...${nocol}\n"
+	wget "${URL}" -O "${WORKING_DIR}/font.ttf.temp" > /dev/null 2>&1
+	fc-validate "${WORKING_DIR}/font.ttf.temp" > /dev/null 2>&1
 	if [ ${?} -ne 0 ]; then
-		echo -e "Font file is corrupted, please download again.\n"
-		rm "${WORKING_DIR}"/font.ttf.temp
+		printf "${red}${LANG_STRINGS[4]}${nocol}\n"
+		rm "${WORKING_DIR}/font.ttf.temp"
 		exit 1
 	fi
-	mv "${WORKING_DIR}"/font.ttf.temp "${WORKING_DIR}"/font.ttf
-	echo -e "${green}Font set sucessfully!${nocol}\n"
+	mv "${WORKING_DIR}/font.ttf.temp" "${WORKING_DIR}/font.ttf"
+	printf "${green}${LANG_STRINGS[5]}!${nocol}\n"
 	termux-reload-settings
 fi
